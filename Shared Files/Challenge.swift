@@ -25,4 +25,10 @@ class Challenge: Identifiable {
         self.name = name
         self.rating = rating
     }
+    
+    init(from: Challenge) {
+        self.id = from.id
+        self.name = from.name
+        self.rating = from.rating
+    }
 }

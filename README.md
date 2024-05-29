@@ -3,9 +3,9 @@ Built and tested using Xcode 15.4, macOS 14.5, and iOS 17.5 (simulator).
 
 This is a pair of apps I put together quickly to test an [idea](https://hachyderm.io/@groue/112524440062602440) posted by [Gwendal Roué](https://hachyderm.io/@groue).
 
-The idea is that I want to create a macOS app that allows me to prepare data in the form of a SwiftData datastore that I can then include in bundle of the iOS app that I plan to distribute on the AppStore.  [Paul Hudson noted how to do this](https://www.hackingwithswift.com/quick-start/swiftdata/how-to-pre-populate-an-app-with-an-existing-swiftdata-database), and that because SwiftData uses Write Ahead Logging (WAL) you need to use Core Data in your macOS app to prepare your datastore.  However, this painful due to the challenges in using complex Swift types like structs, enums, and collections, in Core Data that will then be used in SwiftData.
+The idea is that I want to create a macOS app that allows me to prepare data in the form of a SwiftData database that I can then include in bundle of the iOS app that I plan to distribute on the AppStore.  [Paul Hudson noted how to do this](https://www.hackingwithswift.com/quick-start/swiftdata/how-to-pre-populate-an-app-with-an-existing-swiftdata-database), and that because SwiftData uses Write Ahead Logging (WAL) you need to use Core Data in your macOS app to prepare your database.  However, this painful due to the challenges in using complex Swift types like structs, enums, and collections, in a Core Data database that will then be used in SwiftData.
 
-**Unfortunately the approach doesn't seem to work, though open an issue if it's a problem in my code.  Hopefully Apple will give us a solution for this use case at WWDC24 in June.**
+**With this setup you can stay in SwiftData in both the macOS app used for creating data and the iOS app that consumes the data!  The downside is you need to perform a simple command line step to convert the database**
 
 # Instructions
 1. Clone the repo and then open in Xcode.
@@ -19,7 +19,7 @@ The idea is that I want to create a macOS app that allows me to prepare data in 
 cd <PATH TO REPO/exports/>
 sqlite3 ./challenges.store
 ```
-1. Then run the `vacuum` command to create a new file:
+1. Then run the `vacuum` command to create a new file, note you'll need to delete the output file if it already exists:
 ```
 vacuum into '../VacuumTest/Data/challenges.store';
 ```

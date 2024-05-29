@@ -65,7 +65,8 @@ struct CreateDataApp: App {
                     
                     // Copy the challenges to the exportContainer
                     for challenge in challenges {
-                        exportContainer.mainContext.insert(challenge)
+                        let newChallenge = Challenge(from: challenge)
+                        exportContainer.mainContext.insert(newChallenge)
                     }
                     try exportContainer.mainContext.save()
                     
