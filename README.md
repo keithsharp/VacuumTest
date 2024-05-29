@@ -5,7 +5,7 @@ This is a pair of apps I put together quickly to test an [idea](https://hachyder
 
 The idea is that I want to create a macOS app that allows me to prepare data in the form of a SwiftData database that I can then include in bundle of the iOS app that I plan to distribute on the AppStore.  [Paul Hudson noted how to do this](https://www.hackingwithswift.com/quick-start/swiftdata/how-to-pre-populate-an-app-with-an-existing-swiftdata-database), and that because SwiftData uses Write Ahead Logging (WAL) you need to use Core Data in your macOS app to prepare your database.  However, this painful due to the challenges in using complex Swift types like structs, enums, and collections, in a Core Data database that will then be used in SwiftData.
 
-**With this setup you can stay in SwiftData in both the macOS app used for creating data and the iOS app that consumes the data!  The downside is you need to perform a simple command line step to convert the database**
+**With this setup you can stay in SwiftData in both the macOS app used for creating data and the iOS app that consumes the data!  The downside is you need to perform a simple command line step to convert the database.**
 
 # Instructions
 1. Clone the repo and then open in Xcode.
