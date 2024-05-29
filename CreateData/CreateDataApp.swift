@@ -65,11 +65,7 @@ struct CreateDataApp: App {
                     
                     // Copy the challenges to the exportContainer
                     for challenge in challenges {
-                        print("Inserted: \(challenge.name)")
                         exportContainer.mainContext.insert(challenge)
-                    }
-                    if exportContainer.mainContext.hasChanges {
-                        print("HAVE CHANGES")
                     }
                     try exportContainer.mainContext.save()
                     
