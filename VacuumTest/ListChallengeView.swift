@@ -9,12 +9,23 @@ import SwiftData
 import SwiftUI
 
 struct ListChallengeView: View {
+    @Environment(\.challengesContainer) var challengesContainer: ModelContainer
     
-    @Query private var challenges: [Challenge]
+    @MainActor
+    func getChallenges() -> [Challenge] {
+        let fd = FetchDescriptor<Challenge>()
+        do {
+            let challenges = try challengesContainer.mainContext.fetch(fd)
+            return challenges
+        } catch {
+            print("Failed to fetch challenges: \(error.localizedDescription)")
+        }
+        return []
+    }
     
     var body: some View {
         NavigationStack {
-            List(challenges) { challenge in
+            List(getChallenges()) { challenge in
                 VStack(alignment: .leading) {
                     HStack {
                         Text(challenge.name)
@@ -40,5 +51,5 @@ struct ListChallengeView: View {
     let container = try! ModelContainer(for: Challenge.self, configurations: configuration)
     
     return ListChallengeView()
-        .modelContainer(container)
+        .challengesContainer(container)
 }

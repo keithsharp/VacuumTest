@@ -23,6 +23,7 @@
 		4699E4832C0769EC00884EB7 /* challenges.store in Resources */ = {isa = PBXBuildFile; fileRef = 4699E4812C0769EC00884EB7 /* challenges.store */; };
 		4699E4882C077A5300884EB7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4699E4872C077A5300884EB7 /* README.md */; };
 		4699E4892C077A5300884EB7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4699E4872C077A5300884EB7 /* README.md */; };
+		4699E4902C08925400884EB7 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4699E48F2C08925400884EB7 /* Environment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		4699E47D2C07644400884EB7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4699E4812C0769EC00884EB7 /* challenges.store */ = {isa = PBXFileReference; lastKnownFileType = file; path = challenges.store; sourceTree = "<group>"; };
 		4699E4872C077A5300884EB7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4699E48F2C08925400884EB7 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 			children = (
 				4699E4802C0764A800884EB7 /* Data */,
 				4699E4582C075DA900884EB7 /* VacuumTestApp.swift */,
+				4699E48F2C08925400884EB7 /* Environment.swift */,
 				4699E45A2C075DA900884EB7 /* ListChallengeView.swift */,
 				4699E45C2C075DAA00884EB7 /* Assets.xcassets */,
 				4699E45E2C075DAA00884EB7 /* Preview Content */,
@@ -246,6 +249,7 @@
 				4699E47B2C075E8A00884EB7 /* Challenge.swift in Sources */,
 				4699E4592C075DA900884EB7 /* VacuumTestApp.swift in Sources */,
 				4699E47E2C07644400884EB7 /* Constants.swift in Sources */,
+				4699E4902C08925400884EB7 /* Environment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

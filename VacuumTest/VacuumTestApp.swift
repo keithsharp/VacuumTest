@@ -11,7 +11,7 @@ import SwiftUI
 @main
 struct VacuumTestApp: App {
     
-    var container: ModelContainer
+    var challengesContainer: ModelContainer
     
     init() {
         guard let challengesURL = Bundle.main.url(forResource: Constants.exportFilename, withExtension: nil)  else {
@@ -20,7 +20,7 @@ struct VacuumTestApp: App {
         
         let configuration = ModelConfiguration(url: challengesURL)
         do {
-            self.container = try ModelContainer(for: Challenge.self, configurations: configuration)
+            self.challengesContainer = try ModelContainer(for: Challenge.self, configurations: configuration)
         } catch {
             fatalError("Failed to setup SwiftData for Challenges: \(error.localizedDescription)")
         }
@@ -29,7 +29,7 @@ struct VacuumTestApp: App {
     var body: some Scene {
         WindowGroup {
             ListChallengeView()
-                .modelContainer(container)
+                .challengesContainer(challengesContainer)
         }
     }
 }
