@@ -9,6 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct ListChallengeView: View {
+    @Environment(\.modelContext) var completionRecordContext
     @Environment(\.challengesContainer) var challengesContainer: ModelContainer
     
     @MainActor
@@ -26,20 +27,7 @@ struct ListChallengeView: View {
     var body: some View {
         NavigationStack {
             List(getChallenges()) { challenge in
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text(challenge.name)
-                            .font(.title2)
-                        Spacer()
-                        if let rating = challenge.rating {
-                            Text(rating.rawValue)
-                                .font(.title3)
-                        }
-                    }
-                    Text(challenge.id.uuidString)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
+                ChallengeRowView(challenge: challenge)
             }
             .navigationTitle("Challenges")
         }
@@ -48,8 +36,14 @@ struct ListChallengeView: View {
 
 #Preview {
     let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: Challenge.self, configurations: configuration)
+    let container = try! ModelContainer(for: CompletionRecord.self, Challenge.self, configurations: configuration)
+    
+    for idx in 1...10 {
+        let challenge = Challenge(name: "Challenge \(idx)")
+        container.mainContext.insert(challenge)
+    }
     
     return ListChallengeView()
+        .modelContainer(container)
         .challengesContainer(container)
 }

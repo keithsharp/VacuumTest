@@ -8,5 +8,6 @@
 import Foundation
 
 enum Constants {
-    static let exportFilename = "challenges.store"
+    static let challengesFilename = "challenges.store"
+    static let completionsFilename = "challenges.store"
 }

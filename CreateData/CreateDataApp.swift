@@ -60,7 +60,7 @@ struct CreateDataApp: App {
                     let challenges = try container.mainContext.fetch(fetchDescriptor)
                     
                     // Create the export datastore
-                    let exportConfig = ModelConfiguration(url: url.appending(path: Constants.exportFilename))
+                    let exportConfig = ModelConfiguration(url: url.appending(path: Constants.challengesFilename))
                     let exportContainer = try ModelContainer(for: Challenge.self, configurations: exportConfig)
                     
                     // Copy the challenges to the exportContainer
