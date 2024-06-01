@@ -11,7 +11,7 @@ import SwiftUI
 struct CreateChallengesView: View {
     @Environment(\.modelContext) var modelContext
     
-    @Query private var challenges: [Challenge]
+    @Query(sort: \Challenge.name) private var challenges: [Challenge]
     
     var body: some View {
         NavigationStack {
@@ -24,7 +24,6 @@ struct CreateChallengesView: View {
                     if Bool.random() {
                         rating = Rating.allCases.randomElement()
                     }
-                    // Note the naming breaks if you delete a challenge
                     let challenge = Challenge(name: "Challenge #\(challenges.count)", rating: rating)
                     modelContext.insert(challenge)
                     do {

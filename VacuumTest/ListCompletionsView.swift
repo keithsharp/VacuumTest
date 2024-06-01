@@ -12,7 +12,7 @@ struct ListCompletionsView: View {
     @Environment(\.modelContext) var completionRecordContext
     @Environment(\.challengesContainer) var challengesContainer: ModelContainer
     
-    @Query private var records: [CompletionRecord]
+    @Query(sort: \CompletionRecord.date) private var records: [CompletionRecord]
     
     @MainActor
     func challengeWith(id: UUID) -> Challenge? {

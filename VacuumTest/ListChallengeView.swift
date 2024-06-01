@@ -14,7 +14,7 @@ struct ListChallengeView: View {
     
     @MainActor
     func getChallenges() -> [Challenge] {
-        let fd = FetchDescriptor<Challenge>()
+        let fd = FetchDescriptor<Challenge>(sortBy: [SortDescriptor(\.name)])
         do {
             let challenges = try challengesContainer.mainContext.fetch(fd)
             return challenges
