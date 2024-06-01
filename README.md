@@ -4,7 +4,7 @@ Built and tested using Xcode 15.4, macOS 14.5, and iOS 17.5 (simulator).
 # TL;DR
 Use a macOS app to pre-populate a SwiftData database that you then process with the `sqlite3` command line tool before bundling the processed database in an iOS app that uses the pre-populated data.  All paths assume you are in the root directory of this repository.
 
-1. Build and run the [**CreateData**](https://github.com/keithsharp/VacuumTest/tree/main/CreateData) macOS app.  Add as many challenges as you want and the export (*File -> Export* or &#8984;-e) the data to a new SwiftData database in the `exports` directory.
+1. Build and run the [**CreateData**](https://github.com/keithsharp/VacuumTest/tree/main/CreateData) macOS app.  Add as many challenges as you want and then export (*File -> Export* or &#8984;-e) the data to a new SwiftData database in the `exports` directory.
 2. If there's an existing database at `VacuumTest/Data/challenges.store`, delete this with the command `rm VacuumTest/Data/challenges.store`.
 3. Run the command `sqlite3 exports/challenges.store`.
 4. Within `sqlite3` run the command `VACUUM INTO 'VacuumTest/Data/challenges.store';`.
@@ -33,9 +33,9 @@ The repository contains a macOS app called [**CreateData**](https://github.com/k
 
 ![Create Data App](images/CreateData.png "CreateData App")
 
-The app is very simple - use the add button to add new challenges and swipe left with two fingers on a challenge to delete the challenge.  Internally the app is using SwiftData to store the challenges you add - if you quite an restart the app your challenges will still be present.
+The app is very simple - use the add button to add new challenges and swipe left with two fingers on a challenge to delete the challenge.  Internally the app is using SwiftData to store the challenges you add - if you quit and restart the app your challenges will still be present.
 
-When you've added enough challenges you can export the data using the menu *File -> Export* or the keyboard shortcut &#8984;-e.  This will save your data in a new SwiftData database.  This new database also has WAL enabled and is not suitable for bundling in the iOS app.  To convert the database to one WAL disabled, switch to the terminal and run the [`sqlite3`](https://sqlite.org/cli.html).  Once in the `sqlite3` shell, use the `VACUUM` command to create a new database with WAL disabled.  Your terminal should look something like:
+When you've added enough challenges you can export the data using the menu *File -> Export* or the keyboard shortcut &#8984;-e.  This will save your data in a new SwiftData database.  This new database also has WAL enabled and is not suitable for bundling in the iOS app.  To convert the database to one with WAL disabled, switch to the terminal and run the [`sqlite3`](https://sqlite.org/cli.html) shell.  Once in the `sqlite3` shell, use the `VACUUM` command to create a new database with WAL disabled.  Your terminal should look something like:
 ```sh
 $ sqlite3 exports/challenges.store
 SQLite version 3.43.2 2023-10-10 13:08:14
@@ -51,6 +51,8 @@ The repository contains an iOS app called [**VacuumTest**](https://github.com/ke
 ![VacuumTest App Completion Tab](images/Completions.png "VacuumTest App Completion Tab")
 
 You can mark challenges as complete and these will then show up in the completions tab.  Completions can be deleted by swiping left.  The app uses a second SwiftData database to store the completions, linking these to the corresponding challenge by UUID.  Stopping and restarting the app should show the same list of challenges and completions.
+
+The advantage of using a separate database for the user generated completions is that when you ship a new version of the app you don't have to worry about overwriting user data, though you would still have to handle migrations if you changed the models used for the user data ([`CompletionRecord`](https://github.com/keithsharp/VacuumTest/blob/main/VacuumTest/CompletionRecord.swift) in this example).  The disadvantage of this approach is that you have to maintain the link between the UUID of a challenge and the UUID of the challenge that is stored in the `CompletionRecord`.
 
 # Copyright and license
 Copyright 2024, Keith Sharp &lt;[kms@passback.co.uk](mailto:kms@passback.co.uk)&gt;.
